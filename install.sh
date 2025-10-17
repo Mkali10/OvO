@@ -6,7 +6,7 @@ sudo apt update
 sudo apt install -y git docker.io docker-compose unzip curl nodejs npm
 
 # Clone this repo
-git clone https://github.com/USERNAME/ai-dialer.git ~/ai-dialer
+git clone https://github.com/Mkali10/OvO.git ~/OvO
 cd ~/ai-dialer/infra
 
 # Copy sample .env
