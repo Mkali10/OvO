@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  asterisk:
+    build: ../asterisk
+    container_name: asterisk
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "5060:5060/udp"
+      - "5060:5060/tcp"
+      - "10000-20000:10000-20000/udp"
+    volumes:
+      - /var/spool/asterisk/monitor:/var/spool/asterisk/monitor
+      - ../asterisk/etc:/etc/asterisk
+      - ../asterisk/log:/var/log/asterisk
+
+  web:
+    build: ../web/backend
+    container_name: web
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=postgres://${DB_USER}:${POSTGRES_PASSWORD}@postgres:5432/${DB_NAME}
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:

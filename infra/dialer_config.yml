@@ -1,0 +1,16 @@
+dialer:
+  mode: progressive # manual|progressive|predictive
+  predictive:
+    target_abandon_rate: 0.02
+    min_calling_agents: 2
+    max_outbound_calls: 500
+    safety_margin: 1.2
+  progressive:
+    max_attempts_per_lead: 3
+    dial_wait_seconds: 30
+  manual:
+    enabled: true
+  global:
+    ring_timeout: 30
+    retry_delay_seconds: 60
+    max_concurrent_calls: 1000

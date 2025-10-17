@@ -1,0 +1,14 @@
+# Node modules
+web/backend/node_modules/
+web/frontend/node_modules/
+
+# Docker data
+pgdata/
+redisdata/
+grafana-data/
+
+# Logs and local files
+*.log
+*.zip
+*.tar
+.env
